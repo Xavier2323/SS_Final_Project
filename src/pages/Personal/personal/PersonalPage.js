@@ -4,9 +4,6 @@ import { StyleSheet, Text, View, ScrollView, Image, FlatList, Button, TouchableO
 import MainTab from './MainTab';
 import ActivityImage from './ActivityImage';
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
 export default class PersonalPage extends React.Component {
 
   constructor(props) {
@@ -81,20 +78,20 @@ export default class PersonalPage extends React.Component {
   }
 
   pfp(){
-    if(this.props.image==null) return  require('./images/default_pfp.png');
-    else return { uri: this.props.image };
+    if(this.props.img==null) return  require('./images/default_pfp.png');
+    else return { uri: this.props.img };
   }
+
   atp(num){
     imgname='aimg'+String(num);
     if(this.props[imgname]) return {uri: this.props[imgname]};
     else return require('./images/default-image.jpg');
   }
   gotoedit(){
-    console.log(this.props.image);
+    // console.log(this.props.image);
     this.props.navigation.navigate('editpersonal');
   }
-  logout = async() => {
-    AsyncStorage.clear();
+  logout(){
     this.props.navigation.navigate('Initial');
   }
 }
