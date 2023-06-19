@@ -19,6 +19,8 @@ export default class Post extends React.Component{
         super(props);
     }
     render(){
+        //const endtime = this.props.props.end_time.split(' ');
+        const startTime = this.props.props.start_time.substring(5);
         const endtime = this.props.props.end_time.split(' ');
         const taglist = this.props.props.tags == null ? <View></View> : this.props.props.tags.map((item,index) => {if (index>=2 || item == "") return <View></View>; else return(
             <View style={styles.tag}>
@@ -26,6 +28,7 @@ export default class Post extends React.Component{
             </View>)});
         return(
 
+            
             <View style={[{flexDirection:'column',alignItems:'flex-start'},styles.post]}>
                 
                 <View style={{flexDirection:'row'}}>
@@ -38,7 +41,7 @@ export default class Post extends React.Component{
                             <Text style={{fontSize:20}}>{this.props.props.sport}</Text>
                         </View>
                         <Text style={{marginLeft:8}}>{this.props.props.place}</Text>
-                        <Text style={{marginLeft:8}}>{this.props.props.start_time} ~ {endtime[1]}</Text>
+                        <Text style={{marginLeft:8}}>{startTime} ~ {endtime[1]}</Text>
                         <Text style={{marginLeft:8}}>{this.props.props.people}人</Text>
                     </View>
                     <View style={{flexDirection:'column',justifyContent:'space-between',alignItems:'center'}}>
@@ -46,9 +49,13 @@ export default class Post extends React.Component{
                             <Text>詳情</Text>
                         </TouchableOpacity>
                         <View style={{height:10}}></View>
-                        <TouchableOpacity style={styles.button2}>
-                            <Text>報名</Text>
-                        </TouchableOpacity>
+
+                                          <TouchableOpacity 
+                                              style={styles.button2} 
+                                              onPress={()=>{this.props.navigate('success')}}
+                                          >
+                                              <Text style={styles.ButtonText}>報名</Text>
+                                          </TouchableOpacity>
 
                     </View>
                     
@@ -158,7 +165,6 @@ const styles = StyleSheet.create({
     width: 50,
   }
 });
-
 
 
 /*
