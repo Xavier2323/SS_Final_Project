@@ -22,7 +22,7 @@ export default class JioJioScreen extends React.Component {
         
         this.state = this.initialState();
     }
-    initialState = async () => {
+    initialState = () => {
         const nowTime = new Date();
         nowTime.setSeconds(0);
         const threeHoursTime = new Date();
