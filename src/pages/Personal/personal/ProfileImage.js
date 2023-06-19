@@ -13,11 +13,11 @@ export default function ProfileImage(props) {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
       props.SetImg(result.assets[0].uri);
     }
+
+    props.OnEditImgChange(props.photonum, result.assets[0].uri);
   };
 
   const pfp=()=>{

@@ -10,7 +10,7 @@ export default class EditPersonalPage extends React.Component {
     super(props);
     this.state={
         editname: this.props.name,
-        editimg: this.props.image,
+        editimg: this.props.img,
         editschool: this.props.school,
         editintro: this.props.intro,
         editaimg1: this.props.aimg1,
@@ -52,7 +52,7 @@ export default class EditPersonalPage extends React.Component {
             <View style={{flexDirection: 'row', marginBottom: 10}}>
               <View style={{flex: 1}}>
                 <View style={{alignItems: 'flex-start', flexWrap: 'wrap'}}>
-                  <ProfileImage image={this.state.editimg} SetImg={(img) => { this.setState({...this.state, editimg: img}); }} />
+                  <ProfileImage image={this.state.editimg} photonum={0} SetImg={(img) => { this.setState({...this.state, editimg: img}); }} />
                 </View>
               </View>
               <View style={{flex: 1}}>
@@ -69,14 +69,14 @@ export default class EditPersonalPage extends React.Component {
 
             <MainTab title='活動照片' color='#EB7943'/>
             <View style={styles.activity_pictures}>
-              <ActivityImage image={this.state.editaimg1} SetImg={(img) => { this.setState({...this.state, editaimg1: img}); }}/>
-              <ActivityImage image={this.state.editaimg2} SetImg={(img) => { this.setState({...this.state, editaimg2: img}); }}/>
-              <ActivityImage image={this.state.editaimg3} SetImg={(img) => { this.setState({...this.state, editaimg3: img}); }}/>     
+              <ActivityImage image={this.state.editaimg1} photonum={1} SetImg={(img) => { this.setState({...this.state, editaimg1: img}); }} />
+              <ActivityImage image={this.state.editaimg2} photonum={2} SetImg={(img) => { this.setState({...this.state, editaimg2: img}); }} />
+              <ActivityImage image={this.state.editaimg3} photonum={3} SetImg={(img) => { this.setState({...this.state, editaimg3: img}); }} />     
             </View>
             <View style={styles.activity_pictures}>
-              <ActivityImage image={this.state.editaimg4} SetImg={(img) => { this.setState({...this.state, editaimg4: img}); }}/>
-              <ActivityImage image={this.state.editaimg5} SetImg={(img) => { this.setState({...this.state, editaimg5: img}); }}/>
-              <ActivityImage image={this.state.editaimg6} SetImg={(img) => { this.setState({...this.state, editaimg6: img}); }}/>      
+              <ActivityImage image={this.state.editaimg4} photonum={4} SetImg={(img) => { this.setState({...this.state, editaimg4: img}); }} />
+              <ActivityImage image={this.state.editaimg5} photonum={5} SetImg={(img) => { this.setState({...this.state, editaimg5: img}); }} />
+              <ActivityImage image={this.state.editaimg6} photonum={6} SetImg={(img) => { this.setState({...this.state, editaimg6: img}); }} />      
             </View>
 
             <MainTab title='自我介紹' color='#EB7943'/>
@@ -96,7 +96,6 @@ export default class EditPersonalPage extends React.Component {
   }
 
   store(){
-    // console.log(this.state.editname, this.state.editimg, this.state.editschool, this.state.editintro);
     this.props.OnStore(
       this.state.editname,
       this.state.editimg,
@@ -109,7 +108,6 @@ export default class EditPersonalPage extends React.Component {
       this.state.editaimg5,
       this.state.editaimg6
     );
-    // this.props.navigation.navigate('personal');
   }
 }
 
