@@ -28,7 +28,7 @@ export default class PersonalPage extends React.Component {
           }}
           style={{flex: 1}} // or set height directly
           >
-          <View style={styles.mug}>
+          <View style={{...styles.mug}}>
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
               <Image source={require('./images/tab/back.png')}/>
             </TouchableOpacity>
@@ -47,14 +47,14 @@ export default class PersonalPage extends React.Component {
           
           <TouchableOpacity onPress={() => this.props.navigation.navigate('myjojo')}>
             <View>
-              <View style={styles.my_jojo}>
+              <View style={{...styles.my_jojo, alignSelf: 'center',width : '97%',elevation:5}}>
                 <Text style={{color: 'white',fontSize: 25, fontWeight: '500'}}>我發起的揪揪</Text>
               </View>
             </View>
           </TouchableOpacity>
 
           <MainTab title='活動照片' color='#EB7943'/>
-          <View style={styles.activity_pictures}>
+          <View style={{...styles.activity_pictures}}>
             <Image style={styles.image} source={this.atp(1)}/>
             <Image style={styles.image} source={this.atp(2)}/>  
             <Image style={styles.image} source={this.atp(3)}/>          
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     },
     mug: {
       flexDirection: 'row',
-      height: 100,
+      height: '11%',
       alignItems: 'center'
     },
     my_jojo: {
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     image: {
       width: 108,
       height: 192,
-      borderRadius: 9
+      borderRadius: 9,
     },
     intro: {
       flex: 4,
@@ -180,7 +180,8 @@ const styles = StyleSheet.create({
       padding: 5,
       backgroundColor: '#FBF1D6',
       borderRadius: 10,
-      marginBottom: 10
+      marginBottom: 10,
+      elevation:5,
     },
     label_box: {
       alignSelf: 'flex-start',
