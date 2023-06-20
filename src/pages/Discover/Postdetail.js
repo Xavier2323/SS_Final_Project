@@ -4,16 +4,15 @@ export default class PostDetail extends React.Component{
     constructor(props){
         super(props);
     }
-    const 
     
     render(){
         const data = this.props.statee;
-        console.log(data.state);
+        //console.log(data);
         const date = data.starttime.split(' ')[0], stime = data.starttime.split(' ')[1], etime = data.endtime.split(' ')[1]
         return (
             <View style={styles.container}>
                 <View style={{flex:40, flexDirection:'row', alignItems:'center',justifyContent:'space-between'}}>
-                    <TouchableOpacity style={{ height: 40, width: 40, justifyContent: 'center', alignItems: 'center', borderRadius: 100}} onPress={()=>{this.props.navigation.navigate('main')}}>
+                    <TouchableOpacity style={{ height: 40, width: 40, justifyContent: 'center', alignItems: 'center', borderRadius: 100}} onPress={this.props.handleEnroll}>
                         <Image source={require('../../images/back.png')} style={{ height: 80, width: 80 } } /> 
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginHorizontal:10}}>
@@ -93,6 +92,68 @@ export default class PostDetail extends React.Component{
                 
             </View>
         )
+    }
+
+    handleEnroll = async () => {
+        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+        
+        await axios.post(`${url}/applys/create`,{
+            params:{
+                applicant: data.userid,
+                postid: data.postid,
+            }
+        }).then(res => {
+
+        }).catch(err => {
+            console.log(err)
+        })
+
+        this.props.navigation.navigate('success');
+    }
+
+    handleApprove = async () => {
+        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+        
+        await axios.post(`${url}/applys/update`,{
+            params:{
+                applyid: 3,
+                process: 1
+            }
+        }).then(res => {
+
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    handleReject = async () => {
+        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+        
+        await axios.post(`${url}/applys/update`,{
+            params:{
+                applyid: 3,
+                process: 1
+            }
+        }).then(res => {
+
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+    handleCancel = async () => {
+        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+        
+        await axios.post(`${url}/posts/deleteparticipant`,{
+            params:{
+                postid: data.postid,
+                participant: data.userid,
+            }
+        }).then(res => {
+
+        }).catch(err => {
+            console.log(err)
+        })
     }
 }
 

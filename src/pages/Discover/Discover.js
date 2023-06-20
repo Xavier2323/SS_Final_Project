@@ -67,7 +67,9 @@ export default class DiscoverScreen extends React.Component{
             participant:props.participant,
             tag:props.tags,
             memo:props.memo,
-            state: props.state
+            state: props.state,
+            postid: props.postid,
+            posterid: props.posterid
         })
     }
 }
