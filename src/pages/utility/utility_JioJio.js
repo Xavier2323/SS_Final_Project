@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View , ScrollView, Image, FlatList, Button, TouchableOpacity} from 'react-native';
 
-export const getPic = sport => {
+const getPic = sport => {
   if (sport == "羽球") return require('../../images/badminton.png');
   else if (sport == "籃球") return require("../../images/basketball.png");
   else if (sport == "排球") return require("../../images/volleyball.png");
@@ -69,10 +69,6 @@ export const Progresss = (props) => {
       <TouchableOpacity onPress={() => {props.pressnumber(props.now,5)}}>
         <Image source={getProgressPic(props.now,5)} />
       </TouchableOpacity>
-      <Image source={getEllipsis(props.now,5)} />
-      <TouchableOpacity onPress={() => {props.pressnumber(props.now,6)}}>
-        <Image source={getProgressPic(props.now,6)} />
-      </TouchableOpacity>
     </View>
   )
 }
@@ -93,7 +89,7 @@ export const TagList = (props) => {
       <View style={[styles.currentJioContainer,{justifyContent:'space-between',alignItems:'center',paddingHorizontal:25}]}>
         <Text style={styles.subtitle2}>{props.name}</Text>
         <View style={{width:100}}></View>
-        <Text style={styles.subtitle3}>在貼文中找到{props.times}次</Text>
+        <Text style={styles.subtitle3}>被使用了{props.times}次</Text>
       </View>
     </TouchableOpacity>
   );
@@ -121,7 +117,7 @@ export const PlaceItem = (props) => {
 
 };
 
-export const PastJioItem = ({sport,start_time,end_time,people}) => {
+export const PastJioItem = ({sport,start_time,end_time,people,f,place}) => {
   const endhour = end_time.split(' ');
   return(
     <View style={styles.currentJioContainer}>
@@ -131,35 +127,45 @@ export const PastJioItem = ({sport,start_time,end_time,people}) => {
         <Text style={styles.subtitle3}>{start_time} ~ {endhour[1]} {people}人</Text>
       </View>
       <TouchableOpacity style={styles.launchAgain}
-                        onPress={() => {}}>
+                        onPress={() => {f(sport,place)}}>
         <Text style={styles.ButtonWord}>再次發起</Text>
       </TouchableOpacity>
     </View>
   );
 }
   
-export const CurrentJioItem = ({sport,start_time,end_time,people,posterid,userid}) => {
-  const endhour = end_time == null ? "" : end_time.split(' ');
-  console.log(sport,start_time,end_time,people);
-  if (userid == posterid) return(
+export const CurrentJioItem = ({props,userid,f}) => {
+  const endhour = props.end_time.split(' ');
+  if (userid == props.posterid) return(
     <View style={styles.currentJioContainer}>
-      <Image style={styles.sportIcon} source={getPic(sport)}></Image>
+      <Image style={styles.sportIcon} source={getPic(props.sport)}></Image>
       <View style={styles.currentJioContainer2}>
-        <Text style={styles.subtitle2}>{sport}</Text>
-        <Text style={styles.subtitle3}>{start_time} ~ {endhour[1]} {people}人</Text>
+        <Text style={styles.subtitle2}>{props.sport}</Text>
+        <Text style={styles.subtitle3}>{props.start_time} ~ {endhour[1]} {props.people}人</Text>
       </View>
       <TouchableOpacity style={styles.launchAgain}
-                        onPress={() => {}}>
+                        onPress={() => {
+                          f({
+                            sport:props.sport,
+                            place:props.place,
+                            starttime:props.start_time,
+                            endtime:props.end_time,
+                            people:props.people,
+                            tag:props.tags == null ? [] : props.tags,
+                            memo:props.memo,
+                            postid:props.postid
+                          });
+                        }}>
         <Text style={styles.ButtonWord}>編輯</Text>
       </TouchableOpacity>
     </View>
   );
   else return (
     <View style={styles.currentJioContainer}>
-      <Image style={styles.sportIcon} source={getPic(sport)}></Image>
+      <Image style={styles.sportIcon} source={getPic(props.sport)}></Image>
       <View style={styles.currentJioContainer2}>
-        <Text style={styles.subtitle2}>{sport}</Text>
-        <Text style={styles.subtitle3}>{start_time} ~ {endhour[1]} {people}人</Text>
+        <Text style={styles.subtitle2}>{props.sport}</Text>
+        <Text style={styles.subtitle3}>{props.start_time} ~ {endhour[1]} {props.people}人</Text>
       </View>
     </View>
   );
