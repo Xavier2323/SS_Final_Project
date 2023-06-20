@@ -67,3 +67,34 @@ export const upload_img = async (userid, photonum, uri)=>{
 
   return result;
 }
+
+export const set_pfpimg = async (uri)=>{
+    var data = new FormData();
+    var result=-1;
+  
+    data.append('image',
+        { uri: uri, name: 'image.jpg', type: 'image/jpeg' }
+    );
+      
+    var config_post = {
+        method: 'post',
+        url: `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/image/upload`,
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+        },
+        data: data,
+    };
+  
+    console.log('post');
+    await axios(config_post)
+    .then((res) => {
+        result=res.data.id;
+        console.log(result);
+        console.log(res.data);
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+    return result;
+  }

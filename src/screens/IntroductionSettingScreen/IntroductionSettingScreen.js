@@ -28,15 +28,20 @@ const IntroductionSettingScreen = ({setUserid}) => {
       const school_item = await AsyncStorage.getItem('Data_school');
       const school_stringfyItem = JSON.stringify(school_item);
       const school = JSON.parse(school_stringfyItem);
-      
+      const headshot_item = await AsyncStorage.getItem('Data_headshot');
+      const headshot_stringfyItem = JSON.stringify(headshot_item);
+      const headshot = JSON.parse(headshot_stringfyItem);  
+
+
       console.log('---最終資料---')
       console.log(`暱稱:${nickname}`);
       console.log(`系級:${school}`);
+      console.log(`大頭照:${headshot}`);
       console.log(`自我介紹:${data.Introduction}`);
       console.log('--------------');
 
       //建立userid
-      const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/users/create?account=${username}&name=${nickname}&schoolgrade=${school}&intro=${data.Introduction}`;
+      const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/users/create?account=${username}&name=${nickname}&schoolgrade=${school}&intro=${data.Introduction}&avatar=${headshot}`;
       await axios.post(url).then(async(res) => {
         console.log(res.data)
         AsyncStorage.setItem('Data_id', JSON.stringify(res.data.profile.userid));
