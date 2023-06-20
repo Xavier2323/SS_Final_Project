@@ -25,9 +25,10 @@ bufferjoin = (buffer) => {
     return btoa(binary);//bota一定要加
 }
 
-export const get_img = (str) => {
+export const get_img = async (str) => {
     console.log('get_img_uri');
     var joinStr = '';
+    if(str==null) return null;
     for (var i = 0; i < str.length; i++) {
         joinStr = joinStr + str[i];
     }
@@ -97,4 +98,22 @@ export const set_pfpimg = async (uri)=>{
         console.log(error);
     });
     return result;
+  }
+
+  export const get_img_by_id = async (imgid) => {
+    var config = {
+        method: 'get',
+        url: `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/image?id=${imgid}`,
+    };
+    var arr;
+    await axios(config)
+    .then((res) => {
+        arr=res.data.image;
+        console.log('imgget')
+    })
+    .catch((error) => {
+        console.log(error);
+    });
+
+    return await get_img(arr);
   }

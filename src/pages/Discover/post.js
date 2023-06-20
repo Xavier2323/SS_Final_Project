@@ -4,7 +4,7 @@ import axios from 'axios';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-import {get_img} from '../utility/utility_img';
+import {get_img_by_id} from '../utility/utility_img';
 
 const getPic = sport => {
     if (sport == "羽球") return require('../../images/badminton.png');
@@ -22,8 +22,11 @@ export default class Post extends React.Component{
     constructor(props){
         super(props);
         this.state={
-          success:0
+          success:0,
+          imgsrc: require('../Personal/personal/images/default_pfp.png')
         }
+
+        this.pfp();
     }
     
     render(){
@@ -46,7 +49,7 @@ export default class Post extends React.Component{
               
               <View style={{flexDirection:'row'}}>
                   <View style={{flex:2}}>
-                    <Image style={{borderRadius: 100, height: 60, width: 60}} source={this.pfp()}/>
+                    <Image style={{borderRadius: 100, height: 60, width: 60}} source={this.state.imgsrc}/>
                   </View>
                   <View style={{flexDirection:'column',flex:4}}>
                       <View style={{flexDirection:'row'}}>
@@ -85,9 +88,13 @@ export default class Post extends React.Component{
       this.props.navigate();
   }
 
-  pfp(){
-      uri=get_img(this.props.props.posteravatar);
-      return { uri: uri };
+  pfp=async ()=>{
+      imguri= await get_img_by_id(this.props.props.posteravatar);
+      // console.log(imguri);
+      this.setState({
+        ...this.state,
+        imgsrc: { uri: imguri }
+      });
   }
 
   onSuccess = async() => {
@@ -96,7 +103,7 @@ export default class Post extends React.Component{
         if(this.props.props.participant[i]==this.props.props.userid) temp=1;
       }
       if (temp == 0){
-        const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com/applys/create?applicant=${this.props.props.userid}&postid=${this.props.props.postid}`;
+        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/applys/create?applicant=${this.props.props.userid}&postid=${this.props.props.postid}`;
         await axios.post(url).then(res => {console.log(res.data)})
         .catch(err => {console.log(err)});
         await this.props.update();
