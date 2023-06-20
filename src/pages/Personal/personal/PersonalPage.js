@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Image, FlatList, Button, TouchableO
 
 import MainTab from './MainTab';
 import ActivityImage from './ActivityImage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class PersonalPage extends React.Component {
 
@@ -92,6 +93,7 @@ export default class PersonalPage extends React.Component {
     this.props.navigation.navigate('editpersonal');
   }
   logout(){
+    AsyncStorage.clear();
     this.props.navigation.navigate('Initial');
   }
 }

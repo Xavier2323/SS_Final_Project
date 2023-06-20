@@ -33,13 +33,15 @@ const HomeScreen = ({userid}) => {
       >
         {(props) => <JioJioScreen {...props} userid={userid}/>}
        </Tab.Screen> 
-      <Tab.Screen name="分類" component={CategoryScreen} options={{
+      <Tab.Screen name="分類" options={{
           tabBarLabel: '分類',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="table" color={color} size={20} />
           ),
         }}
-      />
+      >
+        {(props) => <CategoryScreen {...props} userid={userid}/>}
+        </Tab.Screen>
     </Tab.Navigator>
   );
 };

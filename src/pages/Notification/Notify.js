@@ -6,7 +6,6 @@ import axios from 'axios';
 const NotifyScreen = ({navigation,statee, setPostState}) => {
     const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
     const [NotifyList, setList] = useState([]);
-
     axios.get(`${url}/applys/profileandpost`,{
         params:{
             applicant: statee.userid,
@@ -19,9 +18,10 @@ const NotifyScreen = ({navigation,statee, setPostState}) => {
     }).catch(err => {
         console.log(err);
     })
-    const ShowList = NotifyList.filter(function(element){
-        return element.post.posterid != statee.userid;
-    });
+    const ShowList = [];
+    // const ShowList = NotifyList.length == 0 ? [] : NotifyList.filter(function(element){
+    //     return element.post.posterid != statee.userid;
+    // });
     
     return (
         <View style={styles.root}>
