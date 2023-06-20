@@ -48,8 +48,6 @@ export default class JioJioScreen extends React.Component {
 
 
     render() {
-        console.log("dsjoi")
-        console.log(this.props.userid)
         return (
             <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='overview'>
                 <Stack.Screen name="overview">
