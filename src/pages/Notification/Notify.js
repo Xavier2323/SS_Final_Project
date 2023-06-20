@@ -4,7 +4,7 @@ import { NotificationItems } from '../utility/utility_Notification';
 import axios from 'axios';
 
 const NotifyScreen = ({navigation,statee, setPostState}) => {
-    const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+    const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
     const [NotifyList, setList] = useState([]);
     axios.get(`${url}/applys/profileandpost`,{
         params:{

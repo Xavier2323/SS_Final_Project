@@ -45,7 +45,7 @@ const InitialScreen = ({setUserid}) => {
       const password = JSON.parse(password_stringfyItem);
       const response = await Auth.signIn(username, password);
       //取得使用者id
-      const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/users/fromaccount`;
+      const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/users/fromaccount`;
       await axios.get(url,{
         params:{
           account: username

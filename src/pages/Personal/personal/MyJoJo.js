@@ -13,7 +13,7 @@ export default class MyJoJo extends React.Component {
       curJioList: [],
       pastJioList: []
     }
-    const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+    const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
     
     axios.get(`${url}/posts`,{
       params:{

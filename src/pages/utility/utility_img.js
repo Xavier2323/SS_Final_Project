@@ -47,7 +47,7 @@ export const upload_img = async (userid, photonum, uri)=>{
     
   var config_post = {
       method: 'post',
-      url: `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/image/update?userid=${userid}&photo=${photonum}`,
+      url: `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/image/update?userid=${userid}&photo=${photonum}`,
       headers: {
           Accept: "application/json",
           "Content-Type": "multipart/form-data",
@@ -78,7 +78,7 @@ export const set_pfpimg = async (uri)=>{
       
     var config_post = {
         method: 'post',
-        url: `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/image/upload`,
+        url: `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/image/upload`,
         headers: {
             Accept: "application/json",
             "Content-Type": "multipart/form-data",
