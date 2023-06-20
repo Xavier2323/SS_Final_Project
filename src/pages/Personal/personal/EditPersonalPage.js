@@ -5,6 +5,9 @@ import MainTab from './MainTab';
 import ProfileImage from './ProfileImage';
 import ActivityImage from './ActivityImage';
 
+import { Modal } from "../../../components/Modal";
+import CustomButton from '../../../components/CustomButton';
+
 export default class EditPersonalPage extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +22,11 @@ export default class EditPersonalPage extends React.Component {
         editaimg4: this.props.aimg4,
         editaimg5: this.props.aimg5,
         editaimg6: this.props.aimg6,
+
+        isModalVisible : false,
     }
+    this.onHandleModalTruePress = this.onHandleModalTruePress.bind(this);
+    this.onHandleModalFalsePress = this.onHandleModalFalsePress.bind(this);
   }
 
   render() {
@@ -33,7 +40,7 @@ export default class EditPersonalPage extends React.Component {
             >
             <View style={styles.mug}>
               <View style={{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
-                <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+                <TouchableOpacity onPress={() => this.setState({...this.state,isModalVisible : true})}>
                   <Image source={require('./images/tab/back.png')}/>
                 </TouchableOpacity>
                 <TextInput
@@ -90,9 +97,38 @@ export default class EditPersonalPage extends React.Component {
               />
               </View>
             </View>
+
+            <Modal isVisible={this.state.isModalVisible}>
+              <Modal.Container2>
+                    <Modal.Body>
+                      <Text style={styles.modal_text}>確認要放棄編輯嗎?</Text>
+                    </Modal.Body>
+                  <Modal.Footer>
+                    <CustomButton
+                      text="取消"
+                      onPress={this.onHandleModalFalsePress}
+                      type="LOGOUT_CANCEL"
+                    />
+                    <CustomButton
+                      text="離開"
+                      onPress={this.onHandleModalTruePress}
+                      type="LOGOUT_TRUE"
+                    />
+                  </Modal.Footer>
+              </Modal.Container2>
+            </Modal>
+            
           </ScrollView>
         </View>
     );
+  }
+
+  onHandleModalTruePress() {
+    this.setState({...this.state,isModalVisible : false});
+    this.props.navigation.goBack()
+  }
+  onHandleModalFalsePress() {
+    this.setState({...this.state,isModalVisible : false});
   }
 
   store(){
@@ -185,5 +221,12 @@ const styles = StyleSheet.create({
       text: {
         fontSize: 20,
         color: 'white'
-      }
+      },
+      modal_text: {
+        fontSize: 22,
+        fontWeight: "400",
+        textAlign: "center",
+        color: "black",
+        fontWeight: 'bold',
+      },
 });

@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
       color: 'white'
     },
     modal_text: {
-      fontSize: 20,
+      fontSize: 22,
       fontWeight: "400",
       textAlign: "center",
       color: "black",
