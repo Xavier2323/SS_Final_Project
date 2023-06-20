@@ -1,15 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, FlatList, Button, TouchableOpacity, SafeAreaView } from 'react-native';
 
 import MainTab from './MainTab';
 import ActivityImage from './ActivityImage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { Modal } from "../../../components/Modal";
+import CustomButton from '../../../components/CustomButton';
+
 export default class PersonalPage extends React.Component {
 
   constructor(props) {
     super(props);
-  }
+    this.state = {
+      isModalVisible : false,
+    }
+    this.onHandleModalTruePress = this.onHandleModalTruePress.bind(this);
+    this.onHandleModalFalsePress = this.onHandleModalFalsePress.bind(this);
+  } 
 
   render() {
     return (
@@ -73,9 +81,39 @@ export default class PersonalPage extends React.Component {
               </Text>
             </View>
           </View>
+          
+          <Modal isVisible={this.state.isModalVisible}>
+          <Modal.Container2>
+                <Modal.Body>
+                  <Text style={styles.modal_text}>確認要登出嗎?</Text>
+                </Modal.Body>
+              <Modal.Footer>
+                <CustomButton
+                  text="取消"
+                  onPress={this.onHandleModalFalsePress}
+                  type="LOGOUT_CANCEL"
+                />
+                <CustomButton
+                  text="登出"
+                  onPress={this.onHandleModalTruePress}
+                  type="LOGOUT_TRUE"
+                />
+              </Modal.Footer>
+          </Modal.Container2>
+        </Modal>
+
         </ScrollView>
       </View>
     );
+  }
+
+  onHandleModalTruePress() {
+    AsyncStorage.clear();
+    this.setState({...this.state,isModalVisible : false});
+    this.props.navigation.navigate('Initial');
+  }
+  onHandleModalFalsePress() {
+    this.setState({...this.state,isModalVisible : false});
   }
 
   pfp(){
@@ -93,8 +131,7 @@ export default class PersonalPage extends React.Component {
     this.props.navigation.navigate('editpersonal');
   }
   logout(){
-    AsyncStorage.clear();
-    this.props.navigation.navigate('Initial');
+    this.setState({...this.state,isModalVisible : true});
   }
 }
 
@@ -174,5 +211,12 @@ const styles = StyleSheet.create({
     text: {
       fontSize: 20,
       color: 'white'
-    }
+    },
+    modal_text: {
+      fontSize: 20,
+      fontWeight: "400",
+      textAlign: "center",
+      color: "black",
+      fontWeight: 'bold',
+    },
 });

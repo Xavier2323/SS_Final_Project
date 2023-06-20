@@ -102,6 +102,27 @@ const styles = StyleSheet.create({
   text_SETTING: {
     color: '#EB7943',
   },
+  container_LOGOUT_CANCEL: {
+    borderRadius: 10,
+    padding: '2%',
+    width: '30%',
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: 'black'
+  },
+  text_LOGOUT_CANCEL: {
+    color: 'black',
+  },
+  container_LOGOUT_TRUE: {
+    borderRadius: 10,
+    padding: '2%',
+    width: '30%',
+    borderWidth: 1,
+    backgroundColor: '#eb7943',
+  },
+  text_LOGOUT_TRUE: {
+    color: 'white',
+  },
 });
 
 export default CustomButton;
