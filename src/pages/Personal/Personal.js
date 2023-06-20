@@ -21,9 +21,9 @@ export default class PersonalScreen extends React.Component {
         this.state={
             id: this.props.statee.userid,
             img: null,
-            name: 'William',
-            school: '清大電資班大二',
-            intro: '大家好，大家好，大家好，大家好，大家好，大家好，大家好，大家好，大家好，大家好，大家好，大家好，大家好，大家好，大家好，大家好。',
+            name: '載入中..',
+            school: '載入中..',
+            intro: '載入中..',
             aimg1: null,
             aimg2: null,
             aimg3: null,
