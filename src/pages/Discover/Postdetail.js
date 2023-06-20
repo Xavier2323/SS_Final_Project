@@ -81,7 +81,7 @@ export default class PostDetail extends React.Component{
             </View>
         )
         else if(state == 3) return(
-            {/* <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
                 <TouchableOpacity style={styles.button1} >
                     <Text style={{fontSize:25}}>取消報名</Text>
                 </TouchableOpacity>
@@ -90,15 +90,15 @@ export default class PostDetail extends React.Component{
                     <Text style={{fontSize:25}}>已參加</Text>
                 </TouchableOpacity>
                 
-            </View> */}
+            </View> 
 
-                                    <TouchableOpacity 
-                                            style={styles.Button} 
-                                            onPress={()=>{this.props.navigation.navigate('success')}}
-                                        >
-                                            <Text style={styles.ButtonText}>報名</Text>
-                                        </TouchableOpacity>
-                    )
+            // <TouchableOpacity 
+            //     style={styles.Button} 
+            //     onPress={()=>{this.props.navigation.navigate('success')}}
+            // >
+            //     <Text style={styles.ButtonText}>報名</Text>
+            // </TouchableOpacity>
+                    );
     }
 
     handleEnroll = async () => {
