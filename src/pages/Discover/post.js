@@ -45,9 +45,9 @@ export default class Post extends React.Component{
           <View style={[{flexDirection:'column',alignItems:'flex-start'},styles.post]}>
               
               <View style={{flexDirection:'row'}}>
-                  <View style={{flex:2}}>
+                  <TouchableOpacity style={{flex:2}} onPress={this.onPressOtherProfile.bind(this)}>
                     <Image style={{borderRadius: 100, height: 60, width: 60}} source={this.pfp()}/>
-                  </View>
+                  </TouchableOpacity>
                   <View style={{flexDirection:'column',flex:4}}>
                       <View style={{flexDirection:'row'}}>
                           <Image style={styles.sporticon} source={getPic(this.props.props.sport)}></Image> 
@@ -82,12 +82,18 @@ export default class Post extends React.Component{
 
   onPressDetail = async () => {
       await this.props.f({...this.props.props,from:0});
-      this.props.navigate();
+      this.props.navigate.navigate('postdetail');
   }
 
   pfp(){
       uri=get_img(this.props.props.posteravatar);
       return { uri: uri };
+  }
+
+  onPressOtherProfile = async () => {
+    console.log(this.props.props);
+    await this.props.f({...this.props.props, from : 0});
+    this.props.navigate.navigate('Personal', {screen: 'personal'});
   }
 
   onSuccess = async() => {
@@ -100,7 +106,7 @@ export default class Post extends React.Component{
         await axios.post(url).then(res => {console.log(res.data)})
         .catch(err => {console.log(err)});
         await this.props.update();
-        this.props.navigate('success');
+        this.props.navigate.navigate('success');
       }
       
   }

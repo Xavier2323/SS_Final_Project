@@ -20,7 +20,7 @@ export default class MapPost_tabletennis extends React.Component{
     render(){
         const post = this.state.postList
         .filter(item => item.place === '清大桌球館')
-        .map((item) => {return (<Post props={item} f={this.setPostState.bind(this)} navigate={() => {this.props.navigation.navigate('postdetail')}}/>)})
+        .map((item) => {return ( (post != null) ? <Post props={item} f={this.setPostState.bind(this)} navigate={() => {this.props.navigation.navigate('postdetail')}}/> : <View></View>)})
 
         return(
             <ScrollView >
@@ -39,11 +39,6 @@ export default class MapPost_tabletennis extends React.Component{
                 <View style={styles.line} />
 
                 <ScrollView style={styles.scrollview}>
-
-                   
-
-                    
-                    
                     {post}
                     
                 </ScrollView>
