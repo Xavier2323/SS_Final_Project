@@ -18,7 +18,7 @@ export const NotificationItems = ({posterprofile, post, navigation, setPostState
     //console.log(post);
     //Notify: state = 1
     const gotoDetails = async () => {
-        await setPostState({...post, state: 1});
+        await setPostState({...post, state: 1,from:1});
         navigation.navigate('postdetail');
     }
     return (
@@ -30,7 +30,7 @@ export const NotificationItems = ({posterprofile, post, navigation, setPostState
                     <Text style={{flex: 1}}>
                         {post.sport}
                     </Text>
-                    <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', borderRadius: 100 }}>
+                    <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', borderRadius: 100 }} onPress={() => {gotoDetails()}}>
                             <Image source={require('../../images/DetailsButton.png')}/>
                     </TouchableOpacity>
                 </View>
@@ -40,11 +40,11 @@ export const NotificationItems = ({posterprofile, post, navigation, setPostState
     );
 }
 
-export const ApprovalItems = ({applicantprofile, post, navigation, setPostState}) => {
+export const ApprovalItems = ({applicantprofile, post,applyid, navigation, setPostState}) => {
     //const navigation = useNavigation();
     //Approal: state = 2
-    const gotoDetails = async () => {
-        await setPostState({...post, state: 2});
+    const gotoDetails = async() => {
+        await setPostState({...post,applyid:applyid, state: 2,from:1});
         navigation.navigate('postdetail');
     }
     return (
@@ -56,7 +56,7 @@ export const ApprovalItems = ({applicantprofile, post, navigation, setPostState}
                     <Text style={{flex: 1}}>
                         {post.sport}
                     </Text>
-                    <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', borderRadius: 100 }}>
+                    <TouchableOpacity onPress={() => {gotoDetails()}} style={{justifyContent: 'center', alignItems: 'center', borderRadius: 100 }}>
                             <Image source={require('../../images/DetailsButton.png')}/>
                     </TouchableOpacity>
                 </View>
@@ -70,7 +70,7 @@ export const ReminderItems = ({item, navigation, setPostState}) => {
     //const navigation = useNavigation();
     //Reminder: state = 3
     const gotoDetails = async () => {
-        await setPostState({...item, state:3});
+        await setPostState({...item, state:3,from:1});
         navigation.navigate('postdetail');
     }
     const date = item.start_time.split(' ')[0], time = item.start_time.split(' ')[1];
@@ -83,7 +83,7 @@ export const ReminderItems = ({item, navigation, setPostState}) => {
                     <Text style={{flex: 1}}>
                         {item.sport}
                     </Text>
-                    <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', borderRadius: 100 }}>
+                    <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', borderRadius: 100 }} onPress={() => (gotoDetails())}>
                             <Image source={require('../../images/DetailsButton.png')}/>
                     </TouchableOpacity>
                 </View>

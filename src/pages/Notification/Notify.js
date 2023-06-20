@@ -4,7 +4,7 @@ import { NotificationItems } from '../utility/utility_Notification';
 import axios from 'axios';
 
 const NotifyScreen = ({navigation,statee, setPostState}) => {
-    const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
+    const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com`;
     const [NotifyList, setList] = useState([]);
     axios.get(`${url}/applys/profileandpost`,{
         params:{
@@ -18,10 +18,9 @@ const NotifyScreen = ({navigation,statee, setPostState}) => {
     }).catch(err => {
         console.log(err);
     })
-    const ShowList = [];
-    // const ShowList = NotifyList.length == 0 ? [] : NotifyList.filter(function(element){
-    //     return element.post.posterid != statee.userid;
-    // });
+    const ShowList = NotifyList == null ? [] : NotifyList.filter(function(element){
+        return element.post.posterid != statee.userid;
+    });
     
     return (
         <View style={styles.root}>

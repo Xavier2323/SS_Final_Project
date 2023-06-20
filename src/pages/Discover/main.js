@@ -18,13 +18,12 @@ export default class MainScreen extends React.Component{
     }
 
     render(){
-        const post = this.state.postList.map((item) => { return (<Post props={item} f={this.setPostState.bind(this)} navigate={() => {this.props.navigation.navigate('postdetail')}}/>)})
+      if (this.props.statee.update == 1){
+        this.updatePosts();
+        this.props.setUpdate(0);
+      } 
+        const post = this.state.postList.map((item) => { return (<Post props={{...item,userid:this.props.statee.userid}} f={this.setPostState.bind(this)} update={() => {this.updatePosts()}} navigate={() => {this.props.navigation.navigate('postdetail')}}/>)})
         return(
-
-
-
-  
-                
 
                     // {/* <ImageBackground 
                     //     source={require('../../images/Top_app_bar.png')} 
@@ -106,7 +105,7 @@ export default class MainScreen extends React.Component{
     }
 
     updatePosts = async() => {
-        const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/posts`;
+        const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com/posts`;
 
         await axios.get(url,{
             params:{

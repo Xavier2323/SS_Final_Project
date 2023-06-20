@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import {get_img} from '../utility/utility_img';
+import axios from 'axios';
 
 const getPic = sport => {
   if (sport == "羽球") return require('../../images/badminton.png');
@@ -17,18 +18,35 @@ const getPic = sport => {
 
 const Post = ({data,userid} ) => {
   const navigation = useNavigation();
+  
+  const handleImagePress = async(destination) => {
+    console.log(userid)
+    let flagg = 0;
+    for(let i=0;i<data.participant.length;i++)
+    {
+      if(userid==data.participant[i]) flagg=1;
+    }
+    if (flagg == 0){
+      const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com/applys/create?applicant=${userid}&postid=${data.postid}`;
+      await axios.post(url).then(res => {console.log(res.data)})
+      .catch(err => {console.log(err)});
+      const dat = {...data,userid:userid};
+      navigation.navigate('JoinSuccess',{dat});
+    }
+    
+  };
+
   let flag = 0;
   for(let i=0;i<data.participant.length;i++)
     {
       if(userid==data.participant[i]) flag=1;
     }
-  const handleImagePress = (destination,data,flag) => {
-    const dat = {...data,userid:userid}
-    navigation.navigate(destination,{dat});
+  const handleDetailPress = () => {
+    
+    navigation.navigate('PostDetail',{data,userid:userid});
   };
-  const handleJoinPress = () => {
-    setIsJoined(true);
-  };
+
+
   const taglist = data.tags == null ? <View></View> : data.tags.map((item,index) => {if (index>=2 || item == "") return <View></View>; else return(
     <View style={styles.tag}>
         <Text style={styles.tagText}>{item}</Text>
@@ -61,11 +79,11 @@ const Post = ({data,userid} ) => {
         </View>
 
         <View style={{flex:2,alignItems:'center'}}>
-          <TouchableOpacity style={styles.button1} onPress={() => handleImagePress('PostDetail',data)}>
+          <TouchableOpacity style={styles.button1} onPress={() => handleDetailPress()}>
             <Text>詳情</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.button2} onPress={() => handleImagePress('JoinSuccess',data,flag)}>
+          <TouchableOpacity style={styles.button2} onPress={() => handleImagePress()}>
             <Text>{flag==1?"已報名":"報名"}</Text>
           </TouchableOpacity>
         </View>
