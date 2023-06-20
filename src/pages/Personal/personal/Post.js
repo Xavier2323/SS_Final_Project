@@ -46,15 +46,22 @@ export default class Post extends React.Component {
                         {tags}
                     </View>
                 </View>
-                <View style={{flex: 3, justifyContent: 'center', alignItems: 'flex-end'}}>
-                    <DetailTab title={'詳情'} color={'#989898'}/>
-                </View>
+                <TouchableOpacity onPress={this.onPressDetail.bind(this)}>
+                    <View style={{flex: 3, justifyContent: 'center', alignItems: 'flex-end'}}>
+                        <DetailTab title={'詳情'} color={'#989898'}/>
+                     </View>
+                </TouchableOpacity>
+                
             </View> 
         );
     }
     pfp(){
         uri=get_img(this.props.posteravatar);
         return { uri: uri };
+    }
+    onPressDetail = async () => {
+        await this.props.f(this.props.props);
+        this.props.navigate();
     }
 }
 

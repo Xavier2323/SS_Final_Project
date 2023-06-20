@@ -27,6 +27,7 @@ export default class DiscoverScreen extends React.Component{
 
     initPostState = () =>{
         return {
+            userid: this.props.userid,
             sport:"",
             place:"",
             starttime:"",

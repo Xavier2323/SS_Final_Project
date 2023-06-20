@@ -1,7 +1,5 @@
-
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity,ScrollView } from 'react-native';
-
+import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView } from 'react-native';
 
 export default class Success extends React.Component{
     constructor(props){
@@ -9,23 +7,77 @@ export default class Success extends React.Component{
     }
 
     render(){
+        return (
+            <View style={styles.container}>
+                <Image
+                    style={styles.image}
+                    source={require('../../images/success.png')}
+                />
+                
+                <TouchableOpacity 
+                    style={styles.backButton} 
+                    onPress={()=>{this.props.navigation.navigate('postdetail')}}
+                >
+                    <Text style={styles.backButtonText}>回到上頁</Text>
+                </TouchableOpacity>
 
-        <View>
-
-                    <TouchableOpacity style={{ height: 40, width: 40, justifyContent: 'center', alignItems: 'center', borderRadius: 100}} onPress={()=>{this.props.navigation.navigate('main')}}>
-                    <Text style={{fontSize:25}}>回到上頁</Text>
-                    </TouchableOpacity>
-
-        
-                                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
-                                        <View style={{height:10}}></View>
-                                        <TouchableOpacity  onPress={()=>{this.props.navigation.navigate('postdetail')}}>
-                                            <Text style={{fontSize:25}}>回到首頁</Text>
-                                        </TouchableOpacity>
-
-                                    </View>
-
-
-        </View>
+                <TouchableOpacity 
+                    style={styles.homeButton} 
+                    onPress={()=>{this.props.navigation.navigate('main')}}
+                >
+                    <Text style={styles.homeButtonText}>回到首頁</Text>
+                </TouchableOpacity>
+            </View>
+        )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    image: {
+        marginBottom: 220, 
+    },
+    backButton: {
+        backgroundColor: '#EB7943',
+        padding: 5,
+        borderRadius: 15,
+        marginBottom: 10,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        width:'80%',
+    },
+    backButtonText: {
+        color: 'white',
+        fontSize: 25,
+        textAlign:'center',
+    },
+    homeButton: {
+        backgroundColor: 'white',
+        padding: 5,
+        borderRadius: 15,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        width:'80%',
+    },
+    homeButtonText: {
+        color: '#EB7943',
+        fontSize: 25,
+        textAlign:'center',
+    },
+});
