@@ -54,7 +54,7 @@ export default class PersonalScreen extends React.Component {
     }
 
     loaddata = async () => {
-        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+        const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
         console.log('get_profile');
 
         var pfparr=[];
@@ -124,7 +124,7 @@ export default class PersonalScreen extends React.Component {
             aimg6: aimg6,
         }, ()=>{
             this.props.navigation.navigate('personal'); 
-            const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/image/update?userid=${this.state.id}&name=${this.state.name}&schoolgrade=${this.state.school}&intro=${this.state.intro}`;
+            const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/image/update?userid=${this.state.id}&name=${this.state.name}&schoolgrade=${this.state.school}&intro=${this.state.intro}`;
     
             axios.post(url).then(res => {
                 // console.log(res.data);

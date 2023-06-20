@@ -98,7 +98,7 @@ export default class PostEdit extends React.Component {
     }
 
     handleDeletePost = async () => {
-        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/posts/deletepost?postid=${this.props.stat.postid}`;
+        const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/posts/deletepost?postid=${this.props.stat.postid}`;
 
         await axios.post(url).then(res => {
 
@@ -113,7 +113,7 @@ export default class PostEdit extends React.Component {
         if (this.props.stat.sport == "") this.props.updateValid(-1);
         else if (this.props.stat.place == "") this.props.updateValid(-2);
         else {
-            const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+            const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
 
             await axios.get(`${url}/places`,{
                 params:{
@@ -148,7 +148,7 @@ export default class PostEdit extends React.Component {
             const starttime = `${from.getFullYear()}!${from.getMonth()+1}!${from.getDate()}!${from.getHours()}!${from.getMinutes()}`;
             const endtime = `${to.getFullYear()}!${to.getMonth()+1}!${to.getDate()}!${to.getHours()}!${to.getMinutes()}`;
 
-            const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/posts/update?postid=${this.props.stat.postid}&sport=${this.props.stat.sport}&place=${this.props.stat.place}&starttime=${starttime}&endtime=${endtime}&people=${this.props.stat.people}&tags=${this.props.stat.tag.join('!')}&memo=${this.props.stat.memo}`;
+            const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/posts/update?postid=${this.props.stat.postid}&sport=${this.props.stat.sport}&place=${this.props.stat.place}&starttime=${starttime}&endtime=${endtime}&people=${this.props.stat.people}&tags=${this.props.stat.tag.join('!')}&memo=${this.props.stat.memo}`;
 
             await axios.post(url).then(res => {
                 console.log(res.data)

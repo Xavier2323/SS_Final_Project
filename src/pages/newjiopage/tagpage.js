@@ -12,7 +12,7 @@ export default class TagPage extends React.Component{
             list:[]
         }
 
-        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+        const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
         
         axios.get(`${url}/tags`).then(res => {
             this.setState({...this.state,list:[...res.data.tags]});
@@ -77,7 +77,7 @@ export default class TagPage extends React.Component{
 
     handleSearchTextChange = (newText) => {
         this.setState({...this.state,search:newText})
-        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+        const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
         
         axios.get(`${url}/tags`,{
             params:{

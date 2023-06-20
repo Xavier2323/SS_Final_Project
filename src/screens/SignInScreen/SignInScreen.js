@@ -42,7 +42,7 @@ const SignInScreen = ({setUserid}) => {
         console.log("AsyncStorage error", e);
       }
       //取得使用者id
-      const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/users/fromaccount`;
+      const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/users/fromaccount`;
       // console.log(data.username);  
       await axios.get(url,{
         params:{

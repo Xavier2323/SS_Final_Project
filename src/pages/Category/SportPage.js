@@ -105,7 +105,7 @@ import axios from 'axios';
 const SportPage = ({ route,userid}) => {
   const navigation = useNavigation();
   const { data } = route.params;
-  const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+  const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
     const [SportPost, setPost] = useState([]);
     axios.get(`${url}/posts`,{
         params:{

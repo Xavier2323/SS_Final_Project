@@ -11,7 +11,7 @@ export default class Page2 extends React.Component {
             placeList: []
         }
 
-        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+        const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
 
         axios.get(`${url}/places`,{
             params:{

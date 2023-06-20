@@ -106,7 +106,7 @@ export default class MainScreen extends React.Component{
     }
 
     updatePosts = async() => {
-        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/posts`;
+        const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/posts`;
 
         await axios.get(url,{
             params:{
