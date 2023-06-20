@@ -20,7 +20,7 @@ export default class MapPost_baseball extends React.Component{
     render(){
         const post = this.state.postList
         .filter(item => item.place === '清大棒球場')
-        .map((item) => {return (<Post props={item} f={this.setPostState.bind(this)} navigate={() => {this.props.navigation.navigate('postdetail')}}/>)})
+        .map((item) => {return ( (post != null) ? <Post props={item} f={this.setPostState.bind(this)} navigate={() => {this.props.navigation.navigate('postdetail')}}/> : <View></View>)})
 
         return(
             <ScrollView >

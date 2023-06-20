@@ -22,7 +22,7 @@ export default class MainScreen extends React.Component{
         this.updatePosts();
         this.props.setUpdate(0);
       } 
-        const post = this.state.postList.map((item) => { return (<Post props={{...item,userid:this.props.statee.userid}} f={this.setPostState.bind(this)} update={() => {this.updatePosts()}} navigate={() => {this.props.navigation.navigate('postdetail')}}/>)})
+        const post = this.state.postList.map((item) => { return (<Post props={{...item,userid:this.props.statee.userid}} f={this.setPostState.bind(this)} update={() => {this.updatePosts()}} navigate={this.props.navigation}/>)})
         return(
 
                     <View style={[styles.root,{flexDirection:'column',flex:1}]}>
@@ -62,7 +62,7 @@ export default class MainScreen extends React.Component{
                               </ScrollView>
                             </View>
                     
-                    <View style={styles.shortLine} /> 
+                    {/* <View style={styles.shortLine} />  */}
                 
             </View>
 
