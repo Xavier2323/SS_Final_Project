@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
+import {get_img} from '../utility/utility_img';
 
 const getPic = sport => {
     if (sport == "羽球") return require('../../images/badminton.png');
@@ -17,55 +21,78 @@ const getPic = sport => {
 export default class Post extends React.Component{
     constructor(props){
         super(props);
+        this.state={
+          success:0
+        }
     }
+    
     render(){
-        const endtime = this.props.props.end_time.split(' ');
-        const taglist = this.props.props.tags == null ? <View></View> : this.props.props.tags.map((item,index) => {if (index>=2 || item == "") return <View></View>; else return(
-            <View style={styles.tag}>
-                <Text style={styles.tagText}>{item}</Text>
-            </View>)});
-        return(
+      
+      var temp=0;
+      for(let i = 0; i < this.props.props.participant.length; i++){
+      
+        if(this.props.props.participant[i]==this.props.props.userid) temp=1;
+      }
 
-            <View style={[{flexDirection:'column',alignItems:'flex-start'},styles.post]}>
-                
-                <View style={{flexDirection:'row'}}>
-                    <View style={{flex:2}}>
-                            <Image source={require('../../images/me2.png')}/>
-                    </View>
-                    <View style={{flexDirection:'column',flex:4}}>
-                        <View style={{flexDirection:'row'}}>
-                            <Image style={styles.sporticon} source={getPic(this.props.props.sport)}></Image> 
-                            <Text style={{fontSize:20}}>{this.props.props.sport}</Text>
-                        </View>
-                        <Text style={{marginLeft:8}}>{this.props.props.place}</Text>
-                        <Text style={{marginLeft:8}}>{this.props.props.start_time} ~ {endtime[1]}</Text>
-                        <Text style={{marginLeft:8}}>{this.props.props.people}人</Text>
-                    </View>
-                    <View style={{flexDirection:'column',justifyContent:'space-between',alignItems:'center'}}>
-                        <TouchableOpacity style={styles.button1} onPress={this.onPressDetail.bind(this)} >
-                            <Text>詳情</Text>
-                        </TouchableOpacity>
-                        <View style={{height:10}}></View>
-                        <TouchableOpacity style={styles.button2}>
-                            <Text>報名</Text>
-                        </TouchableOpacity>
+      const success= temp==1? ("已報名"):("報名");
+      const startTime = this.props.props.start_time.substring(5);
+      const endtime = this.props.props.end_time.split(' ');
+      const taglist = this.props.props.tags == null ? <View></View> : this.props.props.tags.map((item,index) => {if (index>=2 || item == "") return <View></View>; else return(
+          <View style={styles.tag}>
+              <Text style={styles.tagText}>{item}</Text>
+          </View>)});
+      return(
+          <View style={[{flexDirection:'column',alignItems:'flex-start'},styles.post]}>
+              
+              <View style={{flexDirection:'row'}}>
+                  <View style={{flex:2}}>
+                    <Image style={{borderRadius: 100, height: 60, width: 60}} source={this.pfp()}/>
+                  </View>
+                  <View style={{flexDirection:'column',flex:4}}>
+                      <View style={{flexDirection:'row'}}>
+                          <Image style={styles.sporticon} source={getPic(this.props.props.sport)}></Image> 
+                          <Text style={{fontSize:20}}>{this.props.props.sport}</Text>
+                      </View>
+                      <Text style={{marginLeft:8}}>{this.props.props.place}</Text>
+                      <Text style={{marginLeft:8}}>{startTime} ~ {endtime[1]}</Text>
+                      <Text style={{marginLeft:8}}>人數{this.props.props.participant.length}/{this.props.props.people}</Text>
+                  </View>
+                  <View style={{flexDirection:'column',justifyContent:'space-between',alignItems:'center'}}>
+                      <TouchableOpacity style={styles.button1} onPress={this.onPressDetail.bind(this)} >
+                          <Text style={{color:'white'}}>詳情</Text>
+                      </TouchableOpacity>
+                      <View style={{height:10}}>
+                          <TouchableOpacity 
+                              style={styles.button2} 
+                              onPress={this.onSuccess.bind(this)}
+                          >
+                              <Text style={styles.ButtonText}>{success}</Text>
+                          </TouchableOpacity>
+                      </View>
+                  </View>
+              </View>
 
-                    </View>
-                    
-                </View>
-            
-                <View style={{flexDirection:'row',marginTop:10}}>
-                        <Text>Tags:</Text>
-                        {taglist}
-                </View>
-            </View>
-        )
-    }
+              <View style={{flexDirection:'row',marginTop:10}}>
+                  <Text>Tags:</Text>
+                  {taglist}
+              </View>
+          </View>
+      )
+  }
 
-    onPressDetail = async () => {
-        await this.props.f(this.props.props);
-        this.props.navigate();
-    }
+  onPressDetail = async () => {
+      await this.props.f(this.props.props);
+      this.props.navigate();
+  }
+
+  pfp(){
+      uri=get_img(this.props.props.posteravatar);
+      return { uri: uri };
+  }
+
+     onSuccess = () => {
+      this.props.navigate('success');
+  }
 }
 
 
@@ -83,7 +110,26 @@ export default class Post extends React.Component{
             });
     }, []);
     */
+    
   
+
+    
+
+    PushPosts = async() => {
+      const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com/posts`;
+
+          this.props.props.participant.push(this.props.props.userid);
+      await axios.post(url,{
+          params:{
+              participant:this.props.props.userid,
+              //userid:this.props.props.userid,
+          }
+      }).then(res => {
+          
+      }).catch(err => {console.log(err)});
+
+
+  }
   
 
 
@@ -145,6 +191,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
     marginTop:20,
+    color:'white',
   },
   button2: {
     backgroundColor: '#EB7943',
@@ -156,9 +203,13 @@ const styles = StyleSheet.create({
   },
   tagbox:{
     width: 50,
-  }
+  },
+  ButtonText: {
+    color: 'white',
+    //fontSize: 25,
+    textAlign:'center',
+},
 });
-
 
 
 /*

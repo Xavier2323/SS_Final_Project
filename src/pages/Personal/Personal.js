@@ -30,9 +30,11 @@ export default class PersonalScreen extends React.Component {
             aimg4: null,
             aimg5: null,
             aimg6: null,
+            postList:[],
         }
-
-        this.loaddata();
+        
+        console.log(this.state.id);
+        this.loaddata();    
     }
     
     render() {
@@ -62,6 +64,7 @@ export default class PersonalScreen extends React.Component {
         var img4arr=[];
         var img5arr=[];
         var img6arr=[];
+        console.log(this.state.id);
         await axios.get(`${url}/users`,{
           params:{
             userid: this.state.id
@@ -69,7 +72,6 @@ export default class PersonalScreen extends React.Component {
         }).then(res => {
           pfparr=res.data.profile.avatar;
           img1arr=res.data.profile.photo1;
-        //   console.log(img1arr=res.data.profile.photo2);
           img2arr=res.data.profile.photo2;
           img3arr=res.data.profile.photo3;
           img4arr=res.data.profile.photo4;
@@ -104,6 +106,7 @@ export default class PersonalScreen extends React.Component {
           aimg5: img5_uri,
           aimg6: img6_uri,
         })
+
     }
 
     OnStore=(name,image,school,intro,aimg1,aimg2,aimg3,aimg4,aimg5,aimg6)=>{
@@ -139,4 +142,9 @@ export default class PersonalScreen extends React.Component {
             upload_img(this.state.id, 6, this.state.aimg6);
         });
     }
-}
+    
+
+
+  }
+
+  

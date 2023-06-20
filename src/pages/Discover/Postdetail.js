@@ -45,7 +45,7 @@ export default class PostDetail extends React.Component{
                             
                             {this.judge(data.state)}
                             
-                        </View>
+                        </View >
                     </ScrollView>
                 </View>
             </View>
@@ -81,7 +81,7 @@ export default class PostDetail extends React.Component{
             </View>
         )
         else if(state == 3) return(
-            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
+            {/* <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
                 <TouchableOpacity style={styles.button1} >
                     <Text style={{fontSize:25}}>取消報名</Text>
                 </TouchableOpacity>
@@ -90,8 +90,15 @@ export default class PostDetail extends React.Component{
                     <Text style={{fontSize:25}}>已參加</Text>
                 </TouchableOpacity>
                 
-            </View>
-        )
+            </View> */}
+
+                                    <TouchableOpacity 
+                                            style={styles.Button} 
+                                            onPress={()=>{this.props.navigation.navigate('success')}}
+                                        >
+                                            <Text style={styles.ButtonText}>報名</Text>
+                                        </TouchableOpacity>
+                    )
     }
 
     handleEnroll = async () => {
@@ -325,5 +332,25 @@ const styles = StyleSheet.create({
     fontSize: 30,
 
   },
+  Button: {
+    backgroundColor: '#EB7943',
+    padding: 5,
+    borderRadius: 15,
+    marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    width:'100%',
+    },
+    ButtonText: {
+        color: 'white',
+        fontSize: 25,
+        textAlign:'center',
+    },
 });
 
