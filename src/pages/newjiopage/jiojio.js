@@ -22,7 +22,7 @@ export default class JioJioScreen extends React.Component {
         
         this.state = this.initialState();
     }
-    initialState = async () => {
+    initialState = () => {
         const nowTime = new Date();
         nowTime.setSeconds(0);
         const threeHoursTime = new Date();
@@ -48,8 +48,6 @@ export default class JioJioScreen extends React.Component {
 
 
     render() {
-        console.log("dsjoi")
-        console.log(this.props.userid)
         return (
             <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='overview'>
                 <Stack.Screen name="overview">

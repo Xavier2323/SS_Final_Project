@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, ScrollView, Image, Dimensions, TouchableOpacity
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function Home() {
+export default function Home({userid}) {
   const screenWidth = Dimensions.get('window').width;
   const imageWidth = (screenWidth - 28) / 2; // Adjust the margin/padding as needed
   const imageHeight = imageWidth;

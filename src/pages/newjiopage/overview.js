@@ -31,7 +31,7 @@ export default class Overview extends React.Component {
             <View style={{ flex:40 }}>
               <FlatList 
                 data={this.state.curJioList}
-                renderItem={({ item }) => { return <CurrentJioItem props={item} userid={this.props.stat.userid} f={this.handleEdit.bind(this)}/>; }}
+                renderItem={({ item }) => { return <CurrentJioItem {...item} userid={this.props.stat.userid} f={this.handleEdit.bind(this)}/>; }}
               />
             </View>
         </View>

@@ -139,7 +139,8 @@ export const PastJioItem = ({sport,start_time,end_time,people}) => {
 }
   
 export const CurrentJioItem = ({sport,start_time,end_time,people,posterid,userid}) => {
-  const endhour = end_time.split(' ');
+  const endhour = end_time == null ? "" : end_time.split(' ');
+  console.log(sport,start_time,end_time,people);
   if (userid == posterid) return(
     <View style={styles.currentJioContainer}>
       <Image style={styles.sportIcon} source={getPic(sport)}></Image>

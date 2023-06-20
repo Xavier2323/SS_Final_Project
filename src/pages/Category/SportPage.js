@@ -102,7 +102,7 @@ import axios from 'axios';
     
 // ];
 
-const SportPage = ({ route }) => {
+const SportPage = ({ route,userid}) => {
   const navigation = useNavigation();
   const { data } = route.params;
   const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
@@ -135,7 +135,7 @@ const SportPage = ({ route }) => {
       <View style={styles.container}>
         <ScrollView style={styles.scrollView}>
           {SportPost.map((data, index) => (
-            <Post key={index} data={data} />
+            <Post key={index} data={data} userid={userid}/>
           ))}
         </ScrollView>
       </View>

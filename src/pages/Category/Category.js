@@ -10,7 +10,7 @@ import Home from './Home';
 
 const Stack = createStackNavigator();
 
-const CategoryScreen = () => {
+const CategoryScreen = ({userid}) => {
     const navigation = useNavigation();
     const handleImagePress = (destination, data) => {
         navigation.navigate(destination, { data });
@@ -20,8 +20,12 @@ const CategoryScreen = () => {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-        <Stack.Screen name="SportPage" component={SportPage} />
+        <Stack.Screen name="Home" options={{ headerShown: false }}>
+          {(props) => <Home {...props} userid={userid}/>}
+        </Stack.Screen>  
+        <Stack.Screen name="SportPage" >
+          {(props) => <SportPage {...props} userid={userid}/>}
+        </Stack.Screen> 
         <Stack.Screen name="PostDetail" component={PostDetail} />
         <Stack.Screen name="JoinSuccess" component={JoinSuccess} options={{ headerShown: false }} />
       </Stack.Navigator>
