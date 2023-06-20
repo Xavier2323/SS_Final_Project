@@ -36,7 +36,13 @@ export default class DiscoverScreen extends React.Component{
             participant:[],
             tag:[],
             memo:"",
-            userid:this.props.userid
+            userid:this.props.userid,
+            state:0,
+            postid:0,
+            posterid:0,
+            applyid:0,
+            from:0,
+            update:0
             
         }
     }
@@ -45,19 +51,19 @@ export default class DiscoverScreen extends React.Component{
         return (
             <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='main'>
                 <Stack.Screen name='main'>
-                    {(props) => <MainScreen {...props} statee = {this.state} setPostState={this.setPostState.bind(this)}/>}
+                    {(props) => <MainScreen {...props} statee = {this.state} setPostState={this.setPostState.bind(this)} setUpdate={this.setUpdate.bind(this)}/>}
                 </Stack.Screen>
                 <Stack.Screen name='mappost_tennis'>
                     {(props) => <MapPost_tennis {...props} statee = {this.state}/>}
                 </Stack.Screen>
                 <Stack.Screen name='postdetail'>
-                    {(props) => <PostDetail {...props} statee = {this.state}/>}
+                    {(props) => <PostDetail {...props} statee = {this.state} setUpdate={this.setUpdate.bind(this)}/>}
                 </Stack.Screen>
                 <Stack.Screen name='success'>
                     {(props) => <Success {...props} statee = {this.state}/>}
                 </Stack.Screen>
                 <Stack.Screen name="Notification">
-                    {(props) => <NotificationScreen {...props} statee = {this.state}/>}
+                    {(props) => <NotificationScreen {...props} statee = {this.state} setPostState={this.setPostState.bind(this)}/>}
                 </Stack.Screen>
                 <Stack.Screen name="Personal">
                     {(props) => <PersonalScreen {...props} statee = {this.state}/>}
@@ -106,7 +112,13 @@ export default class DiscoverScreen extends React.Component{
             memo:props.memo,
             state: props.state,
             postid: props.postid,
-            posterid: props.posterid
+            posterid: props.posterid,
+            applyid:props.applyid,
+            from:props.from
         })
+    }
+
+    setUpdate = (num) => {
+        this.setState({...this.state,update:num})
     }
 }

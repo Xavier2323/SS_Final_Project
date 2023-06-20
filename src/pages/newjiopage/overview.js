@@ -61,7 +61,7 @@ export default class Overview extends React.Component {
   }
 
   updateList() {
-    const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
+    const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com`;
 
     axios.get(`${url}/posts`,{
       params:{

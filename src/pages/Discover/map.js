@@ -50,7 +50,7 @@ export default class Map extends React.Component{
                     <Text style={styles.placetext}>棒球場</Text>
                     <Text style={styles.placetext}>尚無揪揪</Text>
                     <TouchableOpacity style={styles.placebutton} onPress={() => {this.props.navigate_baseball()}}>
-                        <Text>發起揪揪</Text>
+                        <Text>查看揪揪</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -72,7 +72,7 @@ export default class Map extends React.Component{
                     <Text style={styles.placetext}>籃球場</Text>
                     <Text style={styles.placetext}>尚無揪揪</Text>
                     <TouchableOpacity style={styles.placebutton} onPress={() => {this.props.navigate_basketball()}}>
-                        <Text>發起揪揪</Text>
+                        <Text>查看揪揪</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -93,7 +93,7 @@ export default class Map extends React.Component{
                     <Text style={styles.placetext}>校友體育館</Text>
                     <Text style={styles.placetext}>尚無揪揪</Text>
                     <TouchableOpacity style={styles.placebutton} onPress={() => {this.props.navigate_badminton()}}>
-                        <Text>發起揪揪</Text>
+                        <Text>查看揪揪</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -114,7 +114,7 @@ export default class Map extends React.Component{
                     <Text style={styles.placetext}>排球場</Text>
                     <Text style={styles.placetext}>尚無揪揪</Text>
                     <TouchableOpacity style={styles.placebutton} onPress={() => {this.props.navigate_volleyball()}}>
-                        <Text>發起揪揪</Text>
+                        <Text>查看揪揪</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -135,7 +135,7 @@ export default class Map extends React.Component{
                     <Text style={styles.placetext}>田徑場</Text>
                     <Text style={styles.placetext}>尚無揪揪</Text>
                     <TouchableOpacity style={styles.placebutton} onPress={() => {this.props.navigate_soccer()}}>
-                        <Text>發起揪揪</Text>
+                        <Text>查看揪揪</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -157,7 +157,7 @@ export default class Map extends React.Component{
                     <Text style={styles.placetext}>游泳館</Text>
                     <Text style={styles.placetext}>尚無揪揪</Text>
                     <TouchableOpacity style={styles.placebutton} onPress={() => {this.props.navigate_swim()}}>
-                        <Text>發起揪揪</Text>
+                        <Text>查看揪揪</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -178,7 +178,7 @@ export default class Map extends React.Component{
                     <Text style={styles.placetext}>桌球館</Text>
                     <Text style={styles.placetext}>尚無揪揪</Text>
                     <TouchableOpacity style={styles.placebutton} onPress={() => {this.props.navigate_tabletennis()}}>
-                        <Text>發起揪揪</Text>
+                        <Text>查看揪揪</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -199,7 +199,7 @@ export default class Map extends React.Component{
                     <Text style={styles.placetext}>體育館</Text>
                     <Text style={styles.placetext}>尚無揪揪</Text>
                     <TouchableOpacity style={styles.placebutton} onPress={() => {this.props.navigate_B_V()}}>
-                        <Text>發起揪揪</Text>
+                        <Text>查看揪揪</Text>
                     </TouchableOpacity>
                 </View>
             </View>

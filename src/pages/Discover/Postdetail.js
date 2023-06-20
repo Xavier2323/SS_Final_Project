@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity,ScrollView } from 'react-native';
+import axios from 'axios';
+
 export default class PostDetail extends React.Component{
     constructor(props){
         super(props);
@@ -12,7 +14,10 @@ export default class PostDetail extends React.Component{
         return (
             <View style={styles.container}>
                 <View style={{flex:40, flexDirection:'row', alignItems:'center',justifyContent:'space-between'}}>
-                    <TouchableOpacity style={{ height: 40, width: 40, justifyContent: 'center', alignItems: 'center', borderRadius: 100}} onPress={this.props.handleEnroll}>
+                    <TouchableOpacity style={{ height: 40, width: 40, justifyContent: 'center', alignItems: 'center', borderRadius: 100}} onPress={() => {
+                        if (this.props.statee.from == 1) this.props.navigation.navigate('Notification')
+                        else this.props.navigation.navigate('main')
+                    }}>
                         <Image source={require('../../images/back.png')} style={{ height: 80, width: 80 } } /> 
                     </TouchableOpacity>
                     <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginHorizontal:10}}>
@@ -54,15 +59,30 @@ export default class PostDetail extends React.Component{
       
     }
     judge(state){
-        if(state == 0) return(
+        if(state == 0) {
+            const data = this.props.statee;
+            let flag=0
+            for (let i=0;i<data.participant.length;i++){
+                if (data.userid==data.participant[i]) flag=1;
+            }
+            if (flag == 0) return(
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
                 <View style={{height:10}}></View>
-                <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate('success')}}>
-                    <Text style={{fontSize:25}}>報名</Text>
+                <TouchableOpacity style={styles.button} onPress={()=>{this.handleEnroll()}}>
+                    <Text style={{fontSize:25,color:'white'}}>報名</Text>
+                </TouchableOpacity>
+            </View>
+            )
+            else return(
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
+                <View style={{height:10}}></View>
+                <TouchableOpacity style={styles.button} onPress={()=>{}}>
+                    <Text style={{fontSize:25,color:'white'}}>已報名</Text>
                 </TouchableOpacity>
 
             </View>
-        )
+            )
+        }
         else if(state == 1) return(
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
                 
@@ -70,23 +90,23 @@ export default class PostDetail extends React.Component{
         )
         else if(state == 2) return(
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
-                <TouchableOpacity style={styles.button1} >
+                <TouchableOpacity style={styles.button1} onPress={() => {this.handleReject()}}>
                     <Text style={{fontSize:25}}>婉拒</Text>
                 </TouchableOpacity>
                 <View style={{height:10}}></View>
-                <TouchableOpacity style={styles.button2} onPress={()=>{this.props.navigation.navigate('success')}}>
+                <TouchableOpacity style={styles.button2} onPress={()=>{this.handleApprove()}}>
                     <Text style={{fontSize:25}}>同意</Text>
                 </TouchableOpacity>
                 
             </View>
         )
         else if(state == 3) return(
-            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
-                <TouchableOpacity style={styles.button1} >
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}} >
+                <TouchableOpacity style={styles.button1} onPress={() =>{this.handleCancel()}}>
                     <Text style={{fontSize:25}}>取消報名</Text>
                 </TouchableOpacity>
                 <View style={{height:10}}></View>
-                <TouchableOpacity style={styles.button2} onPress={()=>{this.props.navigation.navigate('success')}}>
+                <TouchableOpacity style={styles.button2} >
                     <Text style={{fontSize:25}}>已參加</Text>
                 </TouchableOpacity>
                 
@@ -102,65 +122,60 @@ export default class PostDetail extends React.Component{
     }
 
     handleEnroll = async () => {
-        const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com`;
+        const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com/apply/create?applicant=${this.props.statee.userid}&postid=${this.props.statee.postid}`;
         
-        await axios.post(`${url}/applys/create`,{
-            params:{
-                applicant: data.userid,
-                postid: data.postid,
-            }
+        await axios.post(`${url}`,{
         }).then(res => {
-
+            console.log(res.data)
         }).catch(err => {
             console.log(err)
         })
+        this.props.setUpdate(1);
+        this.props.navigation.navigate('success')
 
-        this.props.navigation.navigate('success');
     }
 
     handleApprove = async () => {
-        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
+        const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com/applys/update?applyid=${this.props.statee.applyid}&process=1`;
         
-        await axios.post(`${url}/applys/update`,{
-            params:{
-                applyid: 3,
-                process: 1
-            }
+        await axios.post(`${url}`,{
         }).then(res => {
-
+            console.log(res.data)
         }).catch(err => {
             console.log(err)
         })
+        this.props.setUpdate(1);
+        if (this.props.statee.from == 1) this.props.navigation.navigate('Notification')
+        else this.props.navigation.navigate('main')
     }
 
     handleReject = async () => {
-        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
-        
-        await axios.post(`${url}/applys/update`,{
-            params:{
-                applyid: 3,
-                process: 1
-            }
-        }).then(res => {
+        const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com/applys/update?applyid=${this.props.statee.applyid}&process=-1`;
 
+        await axios.post(`${url}`,{
+        }).then(res => {
+            console.log(res.data)
         }).catch(err => {
             console.log(err)
         })
+        this.props.setUpdate(1);
+        if (this.props.statee.from == 1) this.props.navigation.navigate('Notification')
+        else this.props.navigation.navigate('main')
     }
 
     handleCancel = async () => {
-        const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
-        
-        await axios.post(`${url}/posts/deleteparticipant`,{
-            params:{
-                postid: data.postid,
-                participant: data.userid,
-            }
-        }).then(res => {
+        const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com/posts/deleteparticipant?postid=${this.props.statee.postid}&participant=${this.props.statee.userid}`;
+        console.log("hui")
+        await axios.post(`${url}`,{
 
+        }).then(res => {
+            console.log(res.data)
         }).catch(err => {
             console.log(err)
         })
+        this.props.setUpdate(1);
+        if (this.props.statee.from == 1) this.props.navigation.navigate('Notification')
+        else this.props.navigation.navigate('main')
     }
 }
 

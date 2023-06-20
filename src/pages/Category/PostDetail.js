@@ -4,11 +4,16 @@ import { useNavigation } from '@react-navigation/native';
 import {get_img} from '../utility/utility_img';
 
 const PostDetail = ({ route}) => {
-  const { dat } = route.params;
-  const data = dat;
+  const { data,userid } = route.params;
+
   const navigation = useNavigation();
   const handleImagePress = (destination,data) => {
-    navigation.navigate(destination,{data});
+    let flagg = 0;
+    for(let i=0;i<data.participant.length;i++)
+      {
+        if(userid==data.participant[i]) flagg=1;
+      }
+      if (flagg==0) navigation.navigate(destination,{data});
   };
   const taglist = data.tags == null ? <View></View> : data.tags.map((item,index) => {if (index>=2 || item == "") return <View></View>; else return(
     <View style={styles.tag}>
@@ -22,7 +27,7 @@ const PostDetail = ({ route}) => {
   let flag = 0;
   for(let i=0;i<data.participant.length;i++)
     {
-      if(data.userid==data.participant[i]) flag=1;
+      if(userid==data.participant[i]) flag=1;
     }
   useEffect(() => {
     navigation.setOptions({

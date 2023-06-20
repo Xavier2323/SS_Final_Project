@@ -81,7 +81,7 @@ export default class Post extends React.Component{
   }
 
   onPressDetail = async () => {
-      await this.props.f(this.props.props);
+      await this.props.f({...this.props.props,from:0});
       this.props.navigate();
   }
 
@@ -90,8 +90,19 @@ export default class Post extends React.Component{
       return { uri: uri };
   }
 
-     onSuccess = () => {
-      this.props.navigate('success');
+  onSuccess = async() => {
+      var temp=0;
+      for(let i = 0; i < this.props.props.participant.length; i++){
+        if(this.props.props.participant[i]==this.props.props.userid) temp=1;
+      }
+      if (temp == 0){
+        const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com/applys/create?applicant=${this.props.props.userid}&postid=${this.props.props.postid}`;
+        await axios.post(url).then(res => {console.log(res.data)})
+        .catch(err => {console.log(err)});
+        await this.props.update();
+        this.props.navigate('success');
+      }
+      
   }
 }
 
@@ -116,7 +127,7 @@ export default class Post extends React.Component{
     
 
     PushPosts = async() => {
-      const url = `http://test.eba-rrzupcxn.us-west-2.elasticbeanstalk.com/posts`;
+      const url = `http://JioJioServer.eba-8jp4gbmb.us-west-2.elasticbeanstalk.com/posts`;
 
           this.props.props.participant.push(this.props.props.userid);
       await axios.post(url,{
