@@ -25,39 +25,6 @@ export default class MainScreen extends React.Component{
         const post = this.state.postList.map((item) => { return (<Post props={{...item,userid:this.props.statee.userid}} f={this.setPostState.bind(this)} update={() => {this.updatePosts()}} navigate={() => {this.props.navigation.navigate('postdetail')}}/>)})
         return(
 
-                    // {/* <ImageBackground 
-                    //     source={require('../../images/Top_app_bar.png')} 
-                    //     style={styles.ContainerTop}
-                    //     resizeMode="cover"
-                    // >
-                    //     <View style={styles.topBar}>
-                    //         <TouchableOpacity style={styles.Notification} onPress={()=>{this.props.navigation.navigate('Notification')}}>
-                    //             <Image source={require('../../images/bell.png')}/>
-                    //         </TouchableOpacity>
-                    //         <TouchableOpacity style={styles.Notification} onPress={()=>{this.props.navigation.navigate('Personal')}}>
-                    //             <Image source={require('../../images/Person.png')}/>
-                    //         </TouchableOpacity>
-                    //     </View>
-                    // </ImageBackground> */}
-
-
-            
-
-                    // {/* <ImageBackground 
-                    //     source={require('../../images/Top_app_bar.png')} 
-                    //     style={styles.ContainerTop}
-                    //     resizeMode="cover"
-                    // >
-                    //     <View style={styles.topBar}>
-                    //         <TouchableOpacity style={styles.Notification} onPress={()=>{this.props.navigation.navigate('Notification')}}>
-                    //             <Image source={require('../../images/bell.png')}/>
-                    //         </TouchableOpacity>
-                    //         <TouchableOpacity style={styles.Notification} onPress={()=>{this.props.navigation.navigate('Personal')}}>
-                    //             <Image source={require('../../images/Person.png')}/>
-                    //         </TouchableOpacity>
-                    //     </View>
-                    // </ImageBackground> */}
-
                     <View style={[styles.root,{flexDirection:'column',flex:1}]}>
                     {/* <StatusBar barStyle="light-content" /> */}
                       <View style={{flex:0.5}}></View>
@@ -115,8 +82,6 @@ export default class MainScreen extends React.Component{
         }).then(res => {
             this.setState({postList:res.data.post});
         }).catch(err => {console.log(err)});
-
-
     }
 
     setPostState = async (props) => {

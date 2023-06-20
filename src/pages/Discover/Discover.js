@@ -101,6 +101,7 @@ export default class DiscoverScreen extends React.Component{
    
 
     setPostState = async (props) => {
+        console.log(props);
         this.setState({
             sport:props.sport,
             place:props.place,
@@ -114,7 +115,8 @@ export default class DiscoverScreen extends React.Component{
             postid: props.postid,
             posterid: props.posterid,
             applyid:props.applyid,
-            from:props.from
+            from:props.from,
+            posteravatar: props.posteravatar
         })
     }
 

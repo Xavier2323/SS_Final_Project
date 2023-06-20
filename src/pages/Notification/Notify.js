@@ -8,7 +8,7 @@ const NotifyScreen = ({navigation,statee, setPostState}) => {
     const [NotifyList, setList] = useState([]);
     axios.get(`${url}/applys/profileandpost`,{
         params:{
-            applicant: statee.userid,
+            applicant: statee.userißd,
             process: 1
         }
     }).then(res => {

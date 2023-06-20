@@ -2,9 +2,16 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity,ScrollView } from 'react-native';
 import axios from 'axios';
 
+import { get_img_by_id } from '../utility/utility_img';
+
 export default class PostDetail extends React.Component{
     constructor(props){
         super(props);
+        this.state={
+            imgsrc: require('../Personal/personal/images/default_pfp.png')
+          }
+  
+          this.pfp();
     }
     
     render(){
@@ -29,7 +36,7 @@ export default class PostDetail extends React.Component{
                     <ScrollView>
                         <View style={styles.container}>
                             <View style={{flexDirection:'row'}}></View>
-                            <Image style={styles.avatar} source={require('../../images/me2.png')} />
+                            <Image style={styles.avatar} source={this.state.imgsrc} />
                             <Text>{data.posterName}</Text>
                             <Text style={{fontSize:20}}>運動種類: {data.sport}</Text>
                             <Text style={{fontSize:20, marginTop:10}}>日期: {date}</Text>
@@ -56,7 +63,6 @@ export default class PostDetail extends React.Component{
             </View>
 
         );
-      
     }
     judge(state){
         if(state == 0) {
@@ -112,13 +118,18 @@ export default class PostDetail extends React.Component{
                 
             </View> 
 
-            // <TouchableOpacity 
-            //     style={styles.Button} 
-            //     onPress={()=>{this.props.navigation.navigate('success')}}
-            // >
-            //     <Text style={styles.ButtonText}>報名</Text>
-            // </TouchableOpacity>
-                    );
+
+        );
+    }
+
+    pfp=async ()=>{
+        console.log(this.props.statee);
+        imguri= await get_img_by_id(this.props.statee.posteravatar);
+        // console.log(imguri);
+        this.setState({
+          ...this.state,
+          imgsrc: { uri: imguri }
+        });
     }
 
     handleEnroll = async () => {
@@ -288,7 +299,7 @@ const styles = StyleSheet.create({
         height: 500,
         marginHorizontal: 15
     },
-  avatar2: {
+  avatar: {
     width: 50,
     height: 50,
     borderRadius: 25,
