@@ -29,7 +29,7 @@ export default class JioJioScreen extends React.Component {
         threeHoursTime.setHours(threeHoursTime.getHours() + 3);
         threeHoursTime.setSeconds(0);
         return {
-            userid: 1,
+            userid: this.props.userid,
             postid: 0,
             sport: "",
             place: "",

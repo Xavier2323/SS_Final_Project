@@ -85,9 +85,13 @@ export default class Post extends React.Component{
 
   onPressDetail = async () => {
       await this.props.f({...this.props.props,from:0});
-      this.props.navigate();
+      this.props.navigate.navigate('postdetail');
   }
 
+  onPressOtherProfile = async () => {
+    await this.props.f({...this.props.props,from:0});
+    this.props.navigate.navigate('Person', {screen : 'person'});
+}
   pfp=async ()=>{
       imguri= await get_img_by_id(this.props.props.posteravatar);
       // console.log(imguri);

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Image, FlatList, Button, TouchableO
 
 import Tag from './Tag';
 import DetailTab from './DetailTab';
-import {get_img} from '../../utility/utility_img';
+import {get_img, get_img_by_id} from '../../utility/utility_img';
 
 export const getPic = sport => {
     if (sport == "羽球") return require('../../../images/badminton.png');
@@ -22,6 +22,10 @@ export default class Post extends React.Component {
     constructor(props) {
         super(props);
         this.index=0;
+        this.state={
+            imgsrc: require('./images/default_pfp.png')
+        }
+        this.pfp();
     }
 
     render() {
@@ -30,7 +34,7 @@ export default class Post extends React.Component {
             <View style={styles.container}>
                 <View style={{flex: 5, alignSelf: 'center'}}>
                     <View style={{flexDirection:'row', alignItems: 'center'}}>
-                        <Image style={{borderRadius: 100, height: 60, width: 60}} source={this.pfp()}/>
+                        <Image style={{borderRadius: 100, height: 60, width: 60}} source={this.state.imgsrc}/>
                         <View style={{paddingLeft: 10}}>
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 <Image style={styles.sportIcon} source={getPic(this.props.sport)}></Image>
@@ -55,9 +59,14 @@ export default class Post extends React.Component {
             </View> 
         );
     }
-    pfp(){
-        uri=get_img(this.props.posteravatar);
-        return { uri: uri };
+    pfp=async ()=>{
+        console.log()
+        imguri= await get_img_by_id(this.props.posteravatar);
+        // console.log(imguri);
+        this.setState({
+          ...this.state,
+          imgsrc: { uri: imguri }
+        });
     }
     onPressDetail = async () => {
         await this.props.f(this.props.props);

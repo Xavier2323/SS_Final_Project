@@ -25,7 +25,7 @@ bufferjoin = (buffer) => {
     return btoa(binary);//bota一定要加
 }
 
-export const get_img = async (str) => {
+export const get_img = (str) => {
     console.log('get_img_uri');
     var joinStr = '';
     if(str==null) return null;
@@ -115,5 +115,5 @@ export const set_pfpimg = async (uri)=>{
         console.log(error);
     });
 
-    return await get_img(arr);
+    return get_img(arr);
   }
