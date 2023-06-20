@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'gold',
         borderBottomWidth: 2,
         width: '40%', 
-        alignSelf: 'fixed-start',
+      
         marginVertical: 10,
         marginLeft: '5%',
       },
