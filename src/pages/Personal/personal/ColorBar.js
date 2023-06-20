@@ -8,7 +8,7 @@ export default class ColorBar extends React.Component {
   }
   render() {
     return (
-        <View style={{height: 300}}>
+        <View style={{marginBottom: 10}}>
           <Text style={styles.text}>{this.props.text}</Text>
           <View style={{height: 5, width: 80, backgroundColor: this.props.color}}></View>
         </View>
