@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, Image, FlatList, Button, TouchableO
 import {ReminderItems} from '../utility/utility_Notification';
 import axios from 'axios';
 
-const ReminderScreen = ({navigation,statee}) => {
+const ReminderScreen = ({navigation,statee,setPostState}) => {
     const url = `http://sample.eba-2nparckw.us-west-2.elasticbeanstalk.com`;
     const [ReminderList, setList] = useState([]);
 
@@ -20,6 +20,7 @@ const ReminderScreen = ({navigation,statee}) => {
     }).catch(err => {
         console.log(err);
     })
+    //console.log(ReminderList);
     return (
         <View style={styles.root}>
             <SafeAreaView style={styles.container}>
@@ -27,7 +28,7 @@ const ReminderScreen = ({navigation,statee}) => {
                 <FlatList
                     nestedScrollEnabled={true}
                     data={ReminderList}
-                    renderItem={({ item }) => { return <ReminderItems navigation={navigation} {...item} /> ;}}
+                    renderItem={({ item }) => { return <ReminderItems navigation={navigation} item={item} setPostState={setPostState}/> ;}}
                     />
             </View>
             </SafeAreaView>

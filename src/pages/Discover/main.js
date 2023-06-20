@@ -72,8 +72,8 @@ export default class MainScreen extends React.Component{
     }
 
     setPostState = async (props) => {
-        await this.props.setPostState(props);
-        console.log(this.props.statee);
+        await this.props.setPostState({...props, state: 0});
+        //console.log(this.props.statee);
     }
 
     dummyData = [

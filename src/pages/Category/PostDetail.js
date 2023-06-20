@@ -17,7 +17,7 @@ const PostDetail = ({ route }) => {
       },
     });
   }, );
-  console.log(data);
+  //console.log(data);
   return (
     <View style={styles.container}>
       <Image style={styles.avatar} source={require('../../images/category_images/me2.png')} />

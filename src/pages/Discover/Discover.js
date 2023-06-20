@@ -26,8 +26,8 @@ export default class DiscoverScreen extends React.Component{
             participant:[],
             tag:[],
             memo:"",
-            userid:this.props.userid
-            
+            userid:this.props.userid,
+            state: 0
         }
     }
 
@@ -48,7 +48,7 @@ export default class DiscoverScreen extends React.Component{
                     {(props) => <Success {...props} statee = {this.state}/>}
                 </Stack.Screen>
                 <Stack.Screen name="Notification">
-                    {(props) => <NotificationScreen {...props} statee = {this.state}/>}
+                    {(props) => <NotificationScreen {...props} statee = {this.state} setPostState={this.setPostState.bind(this)}/>}
                 </Stack.Screen>
                 <Stack.Screen name="Personal">
                     {(props) => <PersonalScreen {...props} statee = {this.state}/>}
@@ -61,12 +61,13 @@ export default class DiscoverScreen extends React.Component{
         this.setState({
             sport:props.sport,
             place:props.place,
-            starttime:props.starttime,
-            endtime:props.endtime,
-            people:props.prople,
+            starttime:props.start_time,
+            endtime:props.end_time,
+            people:props.people,
             participant:props.participant,
-            tag:props.tag,
-            memo:props.memo
+            tag:props.tags,
+            memo:props.memo,
+            state: props.state
         })
     }
 }

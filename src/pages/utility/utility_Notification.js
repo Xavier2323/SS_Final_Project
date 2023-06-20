@@ -14,10 +14,12 @@ const getPic = sport => {
     else return "";
 }
 
-export const NotificationItems = ({posterprofile, post, navigation}) => {
+export const NotificationItems = ({posterprofile, post, navigation, setPostState}) => {
     //const navigation = useNavigation();
-
-    const gotoDetails = () => {
+    //console.log(post);
+    //Notify: state = 1
+    const gotoDetails = async () => {
+        await setPostState({...post, state: 1});
         navigation.navigate('postdetail');
     }
     return (
@@ -39,10 +41,11 @@ export const NotificationItems = ({posterprofile, post, navigation}) => {
     );
 }
 
-export const ApprovalItems = ({applicantprofile, post, navigation}) => {
+export const ApprovalItems = ({applicantprofile, post, navigation, setPostState}) => {
     //const navigation = useNavigation();
-
-    const gotoDetails = () => {
+    //Approal: state = 2
+    const gotoDetails = async () => {
+        await setPostState({...post, state: 2});
         navigation.navigate('postdetail');
     }
     return (
@@ -64,21 +67,22 @@ export const ApprovalItems = ({applicantprofile, post, navigation}) => {
     );
 }
 
-export const ReminderItems = ({ sport, start_time, navigation}) => {
+export const ReminderItems = ({item, navigation, setPostState}) => {
     //const navigation = useNavigation();
-
-    const gotoDetails = () => {
+    //Reminder: state = 3
+    const gotoDetails = async () => {
+        await setPostState({...item, state:3});
         navigation.navigate('postdetail');
     }
-    const date = start_time.split(' ')[0], time = start_time.split(' ')[1];
+    const date = item.start_time.split(' ')[0], time = item.start_time.split(' ')[1];
     return (
         <View style={styles.NotificationContainer}>
-            <Image style={styles.sportIcon} source={getPic(sport)} alignSelf='center'></Image>
+            <Image style={styles.sportIcon} source={getPic(item.sport)} alignSelf='center'></Image>
             <View style={styles.informationContainer} alignSelf='center'>
                 <Text style={styles.UpperPart}>於今天{time}開始</Text>
                 <View style={styles.LowerPart}>
                     <Text style={{flex: 1}}>
-                        {sport}
+                        {item.sport}
                     </Text>
                     <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', borderRadius: 100 }} onPress={gotoDetails}>
                             <Image source={require('../../images/DetailsButton.png')}/>

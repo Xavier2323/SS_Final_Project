@@ -1,17 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity,ScrollView } from 'react-native';
-
 export default class PostDetail extends React.Component{
     constructor(props){
         super(props);
     }
-
-
+    const 
     
     render(){
-
         const data = this.props.statee;
-
+        console.log(data.state);
+        const date = data.starttime.split(' ')[0], stime = data.starttime.split(' ')[1], etime = data.endtime.split(' ')[1]
         return (
             <View style={styles.container}>
                 <View style={{flex:40, flexDirection:'row', alignItems:'center',justifyContent:'space-between'}}>
@@ -27,55 +25,75 @@ export default class PostDetail extends React.Component{
                     <ScrollView>
                         <View style={styles.container}>
                             <View style={{flexDirection:'row'}}></View>
-                        <Image style={styles.avatar} source={require('../../images/me2.png')} />
-                        <Text>{data.posterName}</Text>
-                        <Text style={{fontSize:20}}>運動種類: {data.sport}</Text>
-                        <Text style={{fontSize:20, marginTop:10}}>日期: {data.starttime}</Text>
-                        <Text style={{fontSize:20, marginTop:10}}>時間:{data.starttime} ~ {data.endtime}</Text>
-                        {/* <Text>時間: {data.time}</Text> */}
-                        <Text style={{fontSize:20, marginTop:10}}>地點: {data.place}</Text>
-                        <Text style={{fontSize:20, marginTop:10}}>備註:</Text>
-                        <View style={styles.tagContainer}>
-                            <View style={styles.box}>
-                            <Text>{data.memo}</Text>
+                            <Image style={styles.avatar} source={require('../../images/me2.png')} />
+                            <Text>{data.posterName}</Text>
+                            <Text style={{fontSize:20}}>運動種類: {data.sport}</Text>
+                            <Text style={{fontSize:20, marginTop:10}}>日期: {date}</Text>
+                            <Text style={{fontSize:20, marginTop:10}}>時間:{stime} ~ {etime}</Text>
+                            <Text style={{fontSize:20, marginTop:10}}>人數:{data.people}</Text>
+                            <Text style={{fontSize:20, marginTop:10}}>地點: {data.place}</Text>
+
+                            <View style={{flexDirection:'column',alignItems:'flex-start'}}>
+                                <Text style={{fontSize:20, marginTop:10} }>Tags: {data.tag.map((item) => { return (<Button title={item} color={'grey'}></Button>) })}</Text>
                             </View>
-                        </View>
-                        <Text style={{fontSize:20}}>已報名: {data.people}</Text>
-                        <View style={styles.avatarRow}>
-                        
-                            <Image style={styles.avatar2} source={require('../../images/me2.png')} />
-                            <Image style={styles.avatar2} source={require('../../images/me2.png')} />
-                            <Image style={styles.avatar2} source={require('../../images/me2.png')} />
-                            <Image style={styles.avatar2} source={require('../../images/me2.png')} />
-                            <Image style={styles.avatar2} source={require('../../images/me2.png')} />
-                        </View>
-                                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
-                                    <TouchableOpacity style={styles.button1} >
-                                        <Text style={{fontSize:25}}>取消報名</Text>
-                                    </TouchableOpacity>
-                                    <View style={{height:10}}></View>
-                                    <TouchableOpacity style={styles.button2} onPress={()=>{this.props.navigation.navigate('success')}}>
-                                        <Text style={{fontSize:25}}>已參加</Text>
-                                    </TouchableOpacity>
-
+                            <Text style={{fontSize:20, marginTop:10}}>備註:</Text>
+                            <View style={styles.tagContainer}>
+                                <View style={styles.box}>
+                                    <Text>{data.memo}</Text>
                                 </View>
+                            </View>
+                            <Text style={{fontSize:20}}>已報名: {data.participant.length}/{data.people}</Text>
+                            
+                            {this.judge(data.state)}
+                            
                         </View>
-
                     </ScrollView>
                 </View>
-
-                <View style={{flex:50}}>
-
-                </View>
-
-
-                <View style={{flex:5}}></View>
             </View>
 
         );
       
     }
+    judge(state){
+        if(state == 0) return(
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
+                <View style={{height:10}}></View>
+                <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate('success')}}>
+                    <Text style={{fontSize:25}}>報名</Text>
+                </TouchableOpacity>
 
+            </View>
+        )
+        else if(state == 1) return(
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
+                
+            </View>
+        )
+        else if(state == 2) return(
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
+                <TouchableOpacity style={styles.button1} >
+                    <Text style={{fontSize:25}}>婉拒</Text>
+                </TouchableOpacity>
+                <View style={{height:10}}></View>
+                <TouchableOpacity style={styles.button2} onPress={()=>{this.props.navigation.navigate('success')}}>
+                    <Text style={{fontSize:25}}>同意</Text>
+                </TouchableOpacity>
+                
+            </View>
+        )
+        else if(state == 3) return(
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
+                <TouchableOpacity style={styles.button1} >
+                    <Text style={{fontSize:25}}>取消報名</Text>
+                </TouchableOpacity>
+                <View style={{height:10}}></View>
+                <TouchableOpacity style={styles.button2} onPress={()=>{this.props.navigation.navigate('success')}}>
+                    <Text style={{fontSize:25}}>已參加</Text>
+                </TouchableOpacity>
+                
+            </View>
+        )
+    }
 }
 
 
@@ -218,6 +236,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#EB7943',
     borderRadius: 25,
     marginVertical: 20,
+  },
+  button: {
+    width:320,
+    height:40,
+    alignItems: 'center',
+    justifyContent:'center',
+    backgroundColor: '#EB7943',
+    borderRadius: 20,
   },
   button1: {
     backgroundColor: '#989898',

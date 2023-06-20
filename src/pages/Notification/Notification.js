@@ -10,7 +10,7 @@ import ReminderScreen from './Reminder';
 
 const Tab = createMaterialTopTabNavigator();
 
-const NotificationScreen = ({navigation,statee}) => {
+const NotificationScreen = ({navigation,statee, setPostState}) => {
     //const navigation = useNavigation();
 
     const goBacktoDiscover = () => {
@@ -31,13 +31,13 @@ const NotificationScreen = ({navigation,statee}) => {
 
             }}>
                 <Tab.Screen name="通知">
-                    {(props) => <NotifyScreen {...props} navigation={navigation} statee={statee}/>}
+                    {(props) => <NotifyScreen {...props} navigation={navigation} statee={statee} setPostState={setPostState}/>}
                 </Tab.Screen>
                 <Tab.Screen name="待審核">
-                    {(props) => <ApprovalScreen {...props} navigation={navigation} statee={statee}/>}
+                    {(props) => <ApprovalScreen {...props} navigation={navigation} statee={statee} setPostState={setPostState}/>}
                 </Tab.Screen>
                 <Tab.Screen name="活動提醒">
-                    {(props) => <ReminderScreen {...props} navigation={navigation} statee={statee}/>}
+                    {(props) => <ReminderScreen {...props} navigation={navigation} statee={statee} setPostState={setPostState}/>}
                 </Tab.Screen>
             </Tab.Navigator>
         </NavigationContainer>
